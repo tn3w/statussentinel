@@ -26,7 +26,7 @@ static LOGO: &str = r#"       __       __                        __  _          
 An open-source web status monitoring tool written in Rust.
 
 Author: TN3W
-GitHub: https://github.com/TN3W/statussentinel
+GitHub: https://github.com/tn3w/statussentinel
 "#;
 
 
