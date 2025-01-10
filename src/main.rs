@@ -18,7 +18,8 @@ mod request;
 use request::{ResponseResult, get_minecraft_response_time, get_request_response_time};
 
 
-static LOGO: &str = r#"       __       __                        __  _          __
+static LOGO: &str = r#"
+       __       __                        __  _          __
   ___ / /____ _/ /___ _____ ___ ___ ___  / /_(_)__  ___ / /
  (_-</ __/ _ `/ __/ // (_-<(_-</ -_) _ \/ __/ / _ \/ -_) / 
 /___/\__/\_,_/\__/\_,_/___/___/\__/_//_/\__/_/_//_/\__/_/  
