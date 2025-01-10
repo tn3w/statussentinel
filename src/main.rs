@@ -108,9 +108,13 @@ async fn run_monitoring_loop(db_pool: &DbPool) -> Result<(), MonitoringError> {
             let service_states = service_states.clone();
 
             let monitoring_task = tokio::spawn(async move {
-                let response_time = if url.starts_with("tcp://") && url.ends_with(":25565") {
-                    let host = url.trim_start_matches("tcp://").split(':').next().unwrap();
-                    get_minecraft_response_time(host, 25565)
+                let response_time = if url.starts_with("mc://") {
+                    let server_addr = url.trim_start_matches("mc://");
+                    let (host, port) = match server_addr.split_once(':') {
+                        Some((h, p)) => (h, p.parse::<u16>().unwrap_or(25565)),
+                        None => (server_addr, 25565)
+                    };
+                    get_minecraft_response_time(host, port)
                         .map_err(|e| MonitoringError(e.to_string()))? as i32
                 } else {
                     match get_request_response_time(&url)
