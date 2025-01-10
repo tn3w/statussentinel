@@ -17,7 +17,7 @@ pub enum ResponseResult {
 pub async fn get_request_response_time(url: &str) -> Result<ResponseResult, Box<dyn Error>> {
     let client = Client::builder()
         .danger_accept_invalid_certs(true)
-        .timeout(Duration::from_secs(5))
+        .timeout(Duration::from_secs(2))
         .build()
         .map_err(|e| Box::new(e) as Box<dyn Error>)?;
 
@@ -109,8 +109,8 @@ pub fn get_minecraft_response_time(host: &str, port: u16) -> Result<i32, Box<dyn
     
     let response_time = match TcpStream::connect((host, port)) {
         Ok(mut stream) => {
-            stream.set_read_timeout(Some(Duration::from_secs(5)))?;
-            stream.set_write_timeout(Some(Duration::from_secs(5)))?;
+            stream.set_read_timeout(Some(Duration::from_secs(2)))?;
+            stream.set_write_timeout(Some(Duration::from_secs(2)))?;
 
             if let Err(_) = stream.write_all(&create_handshake_packet(host, port)) {
                 return Ok(0);
