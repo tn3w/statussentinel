@@ -1,5 +1,6 @@
 use std::{
     env, fs,
+    error::Error,
     time::Duration,
     collections::HashMap,
     sync::Arc,
@@ -32,7 +33,7 @@ GitHub: https://github.com/tn3w/statussentinel
 
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+async fn main() -> Result<(), Box<dyn Error>> {
     dotenv().ok();
 
     println!("{}", LOGO);
